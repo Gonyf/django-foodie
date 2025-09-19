@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="toast toast-top toast-center">
+        <div class="alert alert-{{message.tags}}">
+            <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    <p>Hello {{ name }}</p>
+    {% if recipes %}
+        <ul>
+            {% for recipe in recipes %}
+            <li><a href="{% url "sandbox:recipe_detail" recipe.id %}">{{ recipe }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <p>There be no recipe</p>
+    {% endif %}
+{% endblock content %}

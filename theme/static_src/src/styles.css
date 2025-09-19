@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: true;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: oklch(28% 0.066 53.813);
+  --color-base-200: oklch(42% 0.095 57.708);
+  --color-base-300: oklch(47% 0.114 61.907);
+  --color-base-content: oklch(97% 0.071 103.193);
+  --color-primary: oklch(80% 0.114 19.571);
+  --color-primary-content: oklch(25% 0.092 26.042);
+  --color-secondary: oklch(84% 0.143 164.978);
+  --color-secondary-content: oklch(26% 0.051 172.552);
+  --color-accent: oklch(82% 0.12 346.018);
+  --color-accent-content: oklch(28% 0.109 3.907);
+  --color-neutral: oklch(28% 0.066 53.813);
+  --color-neutral-content: oklch(98% 0.026 102.212);
+  --color-info: oklch(54% 0.245 262.881);
+  --color-info-content: oklch(97% 0.014 254.604);
+  --color-success: oklch(62% 0.194 149.214);
+  --color-success-content: oklch(98% 0.018 155.826);
+  --color-warning: oklch(68% 0.162 75.834);
+  --color-warning-content: oklch(98% 0.026 102.212);
+  --color-error: oklch(57% 0.245 27.325);
+  --color-error-content: oklch(97% 0.013 17.38);
+  --radius-selector: 2rem;
+  --radius-field: 0rem;
+  --radius-box: 0rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+
+
+@plugin "daisyui/theme" {
+  name: "abyssr";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: oklch(25% 0.08 209);
+  --color-base-200: oklch(20% 0.08 209);
+  --color-base-300: oklch(10% 0.08 209);
+  --color-base-content: oklch(90% 0.076 70.697);
+  --color-primary: oklch(92% 0.265 125);
+  --color-primary-content: oklch(50% 0.265 125);
+  --color-secondary: oklch(83.27% 0.076 298.3);
+  --color-secondary-content: oklch(43.27% 0.076 298.3);
+  --color-accent: oklch(43% 0 0);
+  --color-accent-content: oklch(98% 0 0);
+  --color-neutral: oklch(40% 0.08 209);
+  --color-neutral-content: oklch(90% 0.076 70.697);
+  --color-info: oklch(74% 0.16 232.661);
+  --color-info-content: oklch(29% 0.066 243.157);
+  --color-success: oklch(79% 0.209 151.711);
+  --color-success-content: oklch(26% 0.065 152.934);
+  --color-warning: oklch(84.8% 0.196 84.62);
+  --color-warning-content: oklch(44.8% 0.196 84.62);
+  --color-error: oklch(65% 0.199 24.22);
+  --color-error-content: oklch(27% 0.199 24.22);
+  --radius-selector: 2rem;
+  --radius-field: 2rem;
+  --radius-box: 2rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/**
+  * A catch-all path to Django template files, JavaScript, and Python files
+  * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
+  *
+  * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
+  * the scope of this path.
+  */
+@source "../../../**/*.{html,py,js}";
+@source "../../../venv/Lib/site-packages/crispy_daisyui/**/*.{html,py,js}";
+@source "../../../venv/Lib/site-packages/crispy_daisyui/templates/tailwind/**/*.{html,py,js}";
+@source "../../../venv/Lib/site-packages/crispy_daisyui/templates/tailwind/layout/**/*.{html,py,js}";
+

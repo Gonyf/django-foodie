@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w[800px] mx-auto">
+    
+    <h3>Add Recipe</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-accent" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+   <h1 class="text-7xl text-center p-10">{{ category }} Recipes</h1>
+    <div class="flex flex-wrap gap-10 justify-center my-10">
+        {% for recipe in recipes %}
+            <div class="card card-side bg-neutral w-96 flex-initial h-60">
+                <figure class="w-100">
+                    {% if recipe.user.profile.picture %}
+                    <img
+                    height=100
+                    width=100
+                    src="{{ recipe.user.profile.picture.url }}"
+                    alt="user"
+                    class="object-cover h-full"
+                    >
+                    {% else %}
+                    <img src="https://picsum.photos/id/65/200/300"
+                    height=100
+                    width=100
+                    alt="user"
+                    class="object-cover h-full"
+                    >
+                    {% endif %}
+                </figure>
+                <div class="card-body w-150">
+                    <h2 class="card-title">{{ recipe.name }}</h2>
+                    <p class="overflow-hidden">{{ recipe.description }}</p>
+                    <div class="card-actions justify-end">
+                        <a href="{% url "recipes:recipe_detail" recipe.id %}">{{ recipe.user.username }}</a>
+                        {% comment %} <a href="{% url "foodie_app:category" category.id %}">{{ category }}</a> {% endcomment %}
+                        {% comment %} <button class="btn btn-primary">Watch</button> {% endcomment %}
+                    </div>
+                </div>
+                <a href="{% url "recipes:recipe_detail" recipe.id %}" class="absolute inset-0 z-10" aria-label="Open card"></a>
+            </div>
+        {% endfor %}
+    </div>
+    <a class="btn btn-success border-neutral border-4" href="{% url "foodie_app:add_recipe_with_category" category_id=category.id %}">Add recipe to category</a>
+{% endblock content %}

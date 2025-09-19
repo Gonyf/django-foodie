@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load daisyui_filters %}
+{% block content %}
+    <h3>Edit Profile</h3>
+    <div class="avatar">
+        <div class="mask mask-hexagon-2">
+            {% if request.user.profile.picture %}
+            <img 
+                src="{{ request.user.profile.picture.url }}"
+                alt="profile"
+                style="object-fit: cover; border-radius:10000px">
+            </img>
+            {% endif %}
+    </div>
+    </div>
+    <form 
+        action="{% url "accounts:edit_profile" %}"
+        method="post"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% comment %} {{ form.as_div }} {% endcomment %}
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block page_title %}
+Categories
+{% endblock page_title %}
+{% block content %}
+<div class="flex justify-center gap-8 flex-wrap">
+    {% for category in categories %}
+        <div class="flex-initial card card-side bg-neutral w-96 shadow-sm h-40">
+            <figure class="w-100">
+                <img
+                src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg"
+                alt="Movie" />
+            </figure>
+            <div class="card-body w-150">
+                <h2 class="card-title">{{ category }}</h2>
+            </div>
+            <a href="{% url "foodie_app:category" category_id=category.id %}" class="absolute inset-0 z-10" aria-label="Open card"></a>
+        </div>
+    {% endfor %}
+</div>
+<br>
+<a href="{% url "foodie_app:add_category" %}">Add Category</a>
+{% endblock content %}

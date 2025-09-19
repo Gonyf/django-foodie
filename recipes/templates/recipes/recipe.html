@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load daisyui_filters %}
+{% block page_title %}
+    {{ recipe.name }}
+{% endblock page_title %}
+{% block content %}
+    <div class="bg-neutral rounded-4xl p-5 max-w-[768px] mx-auto my-10">
+
+        <div class="bg-base-100 mb-4 py-7 px-15 rounded-2xl shadow-lg">
+            <h3 class="text-3xl text-center mb-3">Description</h3>
+            <p>{{ recipe.description }}</p>
+        </div>
+        <div class="bg-primary-content flex gap-2 mb-7 p-3 rounded-full w-fit shadow-lg">
+            <div class="text-primary">Category:</div>
+            <a class="badge badge-primary" href="{% url "foodie_app:category" category_id=category.id %}">{{ category }}</a>
+        </div>
+        <div class="bg-base-100 mb-7 py-7 px-15 rounded-2xl shadow-lg">
+            <h3 class="text-3xl text-center mb-3">Ingredients</h3>
+            <p>{{ recipe.ingredients }}</p>
+        </div>
+        <div class="bg-base-100 py-7 px-15 rounded-2xl shadow-lg">
+            <h3 class="text-3xl text-center mb-3">Directions</h3>
+            <p>{{ recipe.directions }}</p>
+        </div>
+    </div>
+        <div class="bg-neutral rounded-4xl p-5 max-w-[768px] mx-auto mt-10">
+            <h3 class="text-4xl text-center mb-3">
+                Comments
+            </h3>
+            {% for comment in comments %}
+            <div class="rounded-2xl bg-base-100 shadow-lg mb-6">
+                <div class="card-body">
+                    <div class="flex">
+                        <h2 class="card-title">{{ comment.user }}</h2>
+                        <div class="avatar">
+                            <div class="mask mask-hexagon-2 w-10 ml-3">
+                                <img src="{{ comment.user.profile.picture.url }}" alt="{{ comment.user }}">
+                            </div>
+                        </div>
+                    </div>
+                    <p>{{ comment.text }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% if user.is_authenticated %}
+                <div class="rounded-2xl bg-base-100 shadow-lg">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ comment_form|crispy }}
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+{% endblock content %}

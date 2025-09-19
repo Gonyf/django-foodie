@@ -1,0 +1,86 @@
+{% load static tailwind_tags %}
+{% load crispy_forms_tags %}
+{% load daisyui_filters %}
+<!DOCTYPE html>
+<html lang="en" data-theme="abyssr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Testing">
+    <meta name="keywords" content="Django">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sandbox!</title>
+    {% tailwind_css %}
+</head>
+<body class="font-serif leading-normal tracking-normal bg-base-200">
+<div class="navbar bg-base-100 drop-shadow-2xl">
+  <div class="flex-1">
+    <a href="{% url "foodie_app:home" %}" class="btn btn-ghost text-xl">
+        Foodies
+    </a>
+    <div class="navbar-start">
+        <a href="{% url "recipes:index" %}" class="btn mr-3">All Recipes</a>
+        <a href="{% url "foodie_app:home" %}" class="btn mr-3">Categories</a>
+        <a href="{% url "foodie_app:add_recipe" %}" class="btn mr-3">Add Recipe</a>
+        <form class="join" action="{% url "recipes:search_results" %}" method="get">
+            <label class="join-item input-border input flex w-auto items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 shrink-0 opacity-70"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd"></path></svg>
+                {{ search_form.query }}
+            </label>
+            <button class="btn btn-neutral join-item" type="submit">Go</button>
+        </form>
+    </div>
+  </div>
+  {% if user.is_authenticated %}
+  <div class="flex gap-2">
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost mask mask-hexagon-2 btn-circle avatar">
+        <div class="object-cover">
+            <img 
+                src="{{ request.user.profile.picture.url }}"
+                alt="{{ user.username }}">
+            </img>
+        </div>
+      </div>
+        <ul
+        class="menu menu-sm dropdown-content bg-neutral text rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li>
+            <a href="{% url "accounts:edit_profile" %}" class="text-lg">
+                Profile
+            </a>
+        </li>
+            <li>
+                <form action="{% url "accounts:logout" %}" method="post">
+                    {% csrf_token %}
+                    <button class="text-lg" type="submit" method="post">Log out</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+{% else %}
+<a class="btn btn-ghost text-lg" href="{% url "accounts:register" %}">Register</a>
+<a class="btn btn-ghost text-lg" href="{% url "accounts:login" %}">Login</a>
+{% endif %}
+
+</div>
+    <main>
+        <div class="bg-base-100 mb-4">
+            <h1 class="text-4xl font-bold py-4 mx-auto w-fit"> 
+                {% block page_title %}
+                {% endblock page_title %}
+            </h1>
+        </div>
+        <div class="container mx-auto mb-10">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </main>
+    <hr>
+    <div>
+        <footer>
+          <pre>Footer</pre>  
+        </footer>
+    </div>
+</body>
+</html>

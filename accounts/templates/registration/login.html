@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load daisyui_filters %}
+{% block page_title %}
+    Log In
+{% endblock page_title %}
+{% block content %}
+    <div class="w-96 mx-auto">
+        <form action="{% url "accounts:login" %}" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+    </div>
+{% endblock content %}
